@@ -1,0 +1,44 @@
+<!-- Title -->
+<div class="container">
+  <div class="row">
+    <h1 class="col-12">Todo App</h1>
+  </div>
+</div>
+
+<!-- Menu  -->
+<hr>
+<div class="container">
+  <div class="row menu">
+    <div class="menu-input">
+      <input type="text" name="" ngDefaultControl id="" [(ngModel)]="todoTitle" (keyup.enter)="addTodo()" placeholder="Enter a new task">
+      <button class="green" type="submit" ngDefaultControl [(ngModel)]="todoTitle" (click)="addTodo()">Add</button>
+    </div>
+    <div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- List Tasks -->
+<div class="container" *ngFor="let todo of todos">
+  <div class="row tasks">
+    <div>
+      <label class="checkbox-inline "><input type="checkbox" value="" [(ngModel)]="todo.completed"></label>
+      <label [ngClass]="{ 'completed' : todo.completed }" *ngIf="!todo.editing; else editingTodo">{{todo.title}}</label>
+    </div>
+    <div>
+      <button class="blue" type="submit" (click)="editTodo(todo)">Edit</button>
+      <ng-template #editingTodo>
+        <input type="text" [(ngModel)]="todo.title" (keyup.enter)="doneEdit(todo)"
+          (keyup.esc)="cancelEdit(todo)" autofocus>
+      </ng-template>
+      <button class="red" type="submit" (click)="deleteTodo(todo.id)">Del</button>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+
+
